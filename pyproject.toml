@@ -1,0 +1,18 @@
+[project]
+name = "gram-critic"
+version = "0.1.0"
+description = "Learned activation-geometry regularizer using Set Transformer over activation Gram Matrix"
+requires-python = ">=3.10"
+dependencies = [
+    "torch>=2.1",
+    "numpy>=1.24",
+    "pyyaml>=6.0",
+    "matplotlib>=3.7",
+]
+
+[tool.setuptools.packages.find]
+include = ["gram_critic*"]
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"

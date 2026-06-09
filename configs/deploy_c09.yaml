@@ -1,0 +1,17 @@
+# Deploy at 90% label corruption — the regime where the validation direction is worth the most.
+# `reg: compare` runs L2 (baseline) / oracle (ceiling) / amortized (the critic, no val labels).
+# This is the HEADLINE config: log-Euclidean matching at reg_lambda=3 reproduces the Results table
+# (amortized +0.094 @rank25, oracle +0.548). For the collapse-prone contrast see deploy_c09_frobenius.yaml.
+name: deploy_c09
+critic: runs/critic.pt
+reg: compare
+metric: logeuclid    # PSD-manifold matching — rank-preserving; the headline geometry
+
+corruption: 0.9
+l2_lambda: 3.0e-3    # tuned weight-decay baseline at this corruption
+reg_lambda: 3.0      # the headline operating point (λ1 underdrives log-Euclidean; see amortized_routing.log)
+hidden: 64
+train_n: 3000
+epochs: 40
+seeds: 3
+probe_k: 64

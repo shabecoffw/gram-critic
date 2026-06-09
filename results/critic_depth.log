@@ -1,0 +1,30 @@
+device mps
+  20000 frames, train=16662 val=3338; batch 32, 40 epochs
+    depth=1 (baseline) ep 0: val_cos=-0.006 (best -0.006)
+    depth=1 (baseline) ep 8: val_cos=+0.075 (best +0.075)
+    depth=1 (baseline) ep16: val_cos=+0.097 (best +0.132)
+    depth=1 (baseline) ep24: val_cos=+0.082 (best +0.174)
+    depth=1 (baseline) ep32: val_cos=+0.197 (best +0.209)
+    depth=1 (baseline) ep39: val_cos=+0.215 (best +0.215)
+  >>> depth=1 (baseline) (80,897 params): train_cos=+0.216  val_cos=+0.215  @ep39
+    depth=2 ep 0: val_cos=+0.010 (best +0.010)
+    depth=2 ep 8: val_cos=+0.078 (best +0.092)
+    depth=2 ep16: val_cos=+0.165 (best +0.168)
+    depth=2 ep24: val_cos=+0.194 (best +0.214)
+    depth=2 ep32: val_cos=+0.220 (best +0.220)
+    depth=2 ep39: val_cos=+0.227 (best +0.227)
+  >>> depth=2 (132,353 params): train_cos=+0.228  val_cos=+0.227  @ep39
+    depth=3 ep 0: val_cos=-0.025 (best -0.025)
+    depth=3 ep 8: val_cos=+0.101 (best +0.101)
+    depth=3 ep16: val_cos=+0.036 (best +0.106)
+    depth=3 ep24: val_cos=+0.172 (best +0.172)
+    depth=3 ep32: val_cos=+0.217 (best +0.217)
+    depth=3 ep39: val_cos=+0.221 (best +0.221)
+  >>> depth=3 (183,809 params): train_cos=+0.223  val_cos=+0.221  @ep39
+    depth=2 wide-attn (h4,m32) ep 0: val_cos=+0.069 (best +0.069)
+    depth=2 wide-attn (h4,m32) ep 8: val_cos=+0.043 (best +0.069)
+    depth=2 wide-attn (h4,m32) ep16: val_cos=+0.113 (best +0.137)
+    depth=2 wide-attn (h4,m32) ep24: val_cos=+0.193 (best +0.193)
+    depth=2 wide-attn (h4,m32) ep32: val_cos=+0.184 (best +0.204)
+    depth=2 wide-attn (h4,m32) ep39: val_cos=+0.214 (best +0.214)
+  >>> depth=2 wide-attn (h4,m32) (134,401 params): train_cos=+0.216  val_cos=+0.214  @ep39

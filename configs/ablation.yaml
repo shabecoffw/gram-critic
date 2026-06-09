@@ -1,0 +1,13 @@
+# What survives the Gram projection? Three ORACLE deliveries of the validation signal (true labels),
+# differing only in the representation they push through. Quantifies the cost of going through the
+# order/rotation-invariant Gram — the same cost the amortized critic pays.
+name: ablation
+methods: [l2, direct, gram_gradient, label_gram]
+corruptions: [0.6, 0.9]
+l2_lambdas: [1.0e-2, 3.0e-3]   # tuned weight-decay per corruption (parallel to corruptions)
+reg_lambda: 1.0
+hidden: 64
+train_n: 3000
+epochs: 40
+seeds: 3
+probe_k: 64

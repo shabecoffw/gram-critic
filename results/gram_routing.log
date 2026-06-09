@@ -1,0 +1,13 @@
+device mps
+=== c=0.9 (L2 kept everywhere) ===
+  L2                     acc=0.356
+  oracle frobenius       acc=0.569@4.6  (+0.213)
+  oracle logeuclid λ0.3  acc=0.877@8.4  (+0.522)
+  oracle logeuclid λ1    acc=0.899@8.6  (+0.543)
+  oracle logeuclid λ3    acc=0.904@8.8  (+0.548)
+=== c=0.6 (L2 kept everywhere) ===
+  L2                     acc=0.800
+  oracle frobenius       acc=0.830@5.9  (+0.030)
+  oracle logeuclid λ0.3  acc=0.882@8.1  (+0.082)
+  oracle logeuclid λ1    acc=0.908@8.8  (+0.109)
+  oracle logeuclid λ3    acc=0.918@9.1  (+0.118)

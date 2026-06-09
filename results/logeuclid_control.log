@@ -1,0 +1,9 @@
+device mps
+=== c=0.9: L2=0.356 ===
+  random ΔK (log-E)    acc=0.406@6.7  (+0.050)
+  critic (log-E)       acc=0.456@25.2  (+0.101)
+  oracle (log-E)       acc=0.904@8.8  (+0.548)
+=== c=0.6: L2=0.800 ===
+  random ΔK (log-E)    acc=0.735@6.4  (-0.065)
+  critic (log-E)       acc=0.833@12.8  (+0.033)
+  oracle (log-E)       acc=0.918@9.2  (+0.118)

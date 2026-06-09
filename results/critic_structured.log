@@ -1,0 +1,23 @@
+device mps
+  20000 frames, train=16662 val=3338; batch 32, 40 epochs
+    pairwise d=64 ep 0: val_cos=+0.006 (best +0.006)
+    pairwise d=64 ep 8: val_cos=+0.050 (best +0.078)
+    pairwise d=64 ep16: val_cos=+0.076 (best +0.166)
+    pairwise d=64 ep24: val_cos=+0.203 (best +0.203)
+    pairwise d=64 ep32: val_cos=+0.204 (best +0.209)
+    pairwise d=64 ep39: val_cos=+0.216 (best +0.216)
+  >>> pairwise d=64 (80,897 params): train_cos=+0.219  val_cos=+0.216  @ep37
+    structured r=20 ep 0: val_cos=+0.004 (best +0.004)
+    structured r=20 ep 8: val_cos=+0.009 (best +0.009)
+    structured r=20 ep16: val_cos=+0.023 (best +0.024)
+    structured r=20 ep24: val_cos=+0.034 (best +0.034)
+    structured r=20 ep32: val_cos=+0.047 (best +0.047)
+    structured r=20 ep39: val_cos=+0.052 (best +0.052)
+  >>> structured r=20 (99,812 params): train_cos=+0.050  val_cos=+0.052  @ep39
+    structured r=32 ep 0: val_cos=-0.003 (best -0.003)
+    structured r=32 ep 8: val_cos=-0.013 (best -0.003)
+    structured r=32 ep16: val_cos=-0.007 (best -0.003)
+    structured r=32 ep24: val_cos=+0.009 (best +0.009)
+    structured r=32 ep32: val_cos=+0.032 (best +0.032)
+    structured r=32 ep39: val_cos=+0.041 (best +0.041)
+  >>> structured r=32 (141,152 params): train_cos=+0.040  val_cos=+0.041  @ep39

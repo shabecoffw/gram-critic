@@ -1,0 +1,16 @@
+# Deploy at 60% label corruption. Harder for the critic: this regime needs rank preserved, so
+# log-Euclidean matching matters most here (Frobenius goes negative). Reproduces the c=0.6 Results
+# row: amortized +0.031 @rank13, oracle +0.118.
+name: deploy_c06
+critic: runs/critic.pt
+reg: compare
+metric: logeuclid    # PSD-manifold matching — rank-preserving; the headline geometry
+
+corruption: 0.6
+l2_lambda: 1.0e-2    # tuned weight-decay baseline at this corruption
+reg_lambda: 3.0      # headline operating point (matches amortized_routing.log)
+hidden: 64
+train_n: 3000
+epochs: 40
+seeds: 3
+probe_k: 64

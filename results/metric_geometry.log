@@ -1,0 +1,21 @@
+device mps
+
+=== corruption=0.9  (L2 λ=0.003, 3 seeds, oracle ΔK) ===
+    l2 (baseline)       : acc=0.356
+    frobenius           : acc=0.568  Δ=+0.213  @rank 4.7
+    power α=0.5         : acc=0.537  Δ=+0.182  @rank 8.2
+    power α=0.25        : acc=0.462  Δ=+0.107  @rank 8.0
+    logeuclid           : acc=0.901  Δ=+0.545  @rank 8.7
+    frob+logdet b=1e-3  : acc=0.548  Δ=+0.192  @rank 6.3
+    frob+logdet b=1e-2  : acc=0.476  Δ=+0.120  @rank 22.4
+    frob+logdet b=1e-1  : acc=0.410  Δ=+0.054  @rank 32.2
+
+=== corruption=0.6  (L2 λ=0.01, 3 seeds, oracle ΔK) ===
+    l2 (baseline)       : acc=0.800
+    frobenius           : acc=0.830  Δ=+0.030  @rank 5.9
+    power α=0.5         : acc=0.821  Δ=+0.022  @rank 7.2
+    power α=0.25        : acc=0.813  Δ=+0.013  @rank 7.1
+    logeuclid           : acc=0.908  Δ=+0.108  @rank 8.8
+    frob+logdet b=1e-3  : acc=0.838  Δ=+0.038  @rank 6.7
+    frob+logdet b=1e-2  : acc=0.852  Δ=+0.052  @rank 15.5
+    frob+logdet b=1e-1  : acc=0.835  Δ=+0.035  @rank 28.7

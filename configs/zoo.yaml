@@ -1,0 +1,17 @@
+# Velocity-field training set: one-step validation ΔK pairs probed from a population of MLPs.
+# 6 corruptions x 16 seeds x 40 epochs x 3 probes x 8 flow-steps = 92,160 frames (~3.6 GB float16).
+# This is the zoo behind the headline result: at ~20k frames the deploy collapses, at 92k it wins
+# (see README, "What I learned"). For a cheaper smoke-test zoo, drop `seeds` / `probe_reps`.
+name: zoo_default
+out: runs/zoo
+
+corruptions: [0.0, 0.2, 0.4, 0.6, 0.8, 0.9]
+seeds: 16
+train_n: 3000
+hidden: 64
+
+epochs: 40          # probed every epoch -> training-maturity diversity
+probe_k: 64         # samples per Gram (the K in K x K)
+probe_reps: 3
+k_flow: 8           # one-step val steps walked per probe (the velocity field)
+val_lr: 1.0

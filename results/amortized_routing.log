@@ -1,0 +1,13 @@
+device mps
+=== c=0.9 (L2 kept everywhere) ===
+  L2                         acc=0.356
+  amortized frobenius λ1     acc=0.458@1.5  (+0.102)
+  amortized logeuclid λ1     acc=0.397@17.2  (+0.041)
+  amortized logeuclid λ3     acc=0.450@25.2  (+0.094)
+  oracle logeuclid λ3 (ceil) acc=0.902@8.7  (+0.547)
+=== c=0.6 (L2 kept everywhere) ===
+  L2                         acc=0.800
+  amortized frobenius λ1     acc=0.762@1.7  (-0.038)
+  amortized logeuclid λ1     acc=0.824@8.7  (+0.024)
+  amortized logeuclid λ3     acc=0.831@12.8  (+0.031)
+  oracle logeuclid λ3 (ceil) acc=0.919@9.2  (+0.119)

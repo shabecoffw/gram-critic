@@ -1,0 +1,16 @@
+device mps
+  20000 frames, train=16662 val=3338; batch 32, 40 epochs (converged)
+    d=32 ep 0: val_cos=-0.027 (best -0.027)
+    d=32 ep 8: val_cos=+0.063 (best +0.063)
+    d=32 ep16: val_cos=+0.131 (best +0.131)
+    d=32 ep24: val_cos=+0.117 (best +0.176)
+    d=32 ep32: val_cos=+0.190 (best +0.194)
+    d=32 ep39: val_cos=+0.201 (best +0.201)
+  >>> d_model=32 (20,993 params): train_cos=+0.201  val_cos=+0.201  @ep39
+    d=64 ep 0: val_cos=+0.006 (best +0.006)
+    d=64 ep 8: val_cos=+0.050 (best +0.078)
+    d=64 ep16: val_cos=+0.076 (best +0.166)
+    d=64 ep24: val_cos=+0.203 (best +0.203)
+    d=64 ep32: val_cos=+0.204 (best +0.209)
+    d=64 ep39: val_cos=+0.216 (best +0.216)
+  >>> d_model=64 (80,897 params): train_cos=+0.219  val_cos=+0.216  @ep37

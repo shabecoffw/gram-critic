@@ -1,0 +1,15 @@
+=== DEPLOY c=0.9 ===
+[deploy] device=mps
+  corruption=0.9  (l2_lambda=0.003, reg_lambda=1.0)
+    l2       : acc=0.356  eff_rank=7.7
+    oracle   : acc=0.569  eff_rank=4.6  (vs L2 +0.213)
+    amortized: acc=0.458  eff_rank=1.5  (vs L2 +0.102)
+    control  : acc=0.356  eff_rank=7.7  (vs L2 +0.000)
+=== DEPLOY c=0.6 ===
+[deploy] device=mps
+  corruption=0.6  (l2_lambda=0.01, reg_lambda=1.0)
+    l2       : acc=0.800  eff_rank=6.9
+    oracle   : acc=0.830  eff_rank=5.9  (vs L2 +0.030)
+    amortized: acc=0.762  eff_rank=1.7  (vs L2 -0.038)
+    control  : acc=0.800  eff_rank=6.9  (vs L2 +0.000)
+ALL_DONE

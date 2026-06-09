@@ -1,0 +1,15 @@
+device mps
+=== c=0.9 ===
+  L2                : acc=0.356@7.7  (vs L2 +0.000)
+  critic            : acc=0.458@1.5  (vs L2 +0.102)
+  critic+rank.01    : acc=0.447@1.5  (vs L2 +0.092)
+  critic+rank.03    : acc=0.436@1.5  (vs L2 +0.081)
+  critic+rank.1     : acc=0.423@1.4  (vs L2 +0.067)
+  critic+rank.3     : acc=0.354@13.5  (vs L2 -0.001)
+=== c=0.6 ===
+  L2                : acc=0.800@6.9  (vs L2 +0.000)
+  critic            : acc=0.762@1.7  (vs L2 -0.038)
+  critic+rank.01    : acc=0.763@1.7  (vs L2 -0.037)
+  critic+rank.03    : acc=0.772@1.8  (vs L2 -0.028)
+  critic+rank.1     : acc=0.786@2.0  (vs L2 -0.014)
+  critic+rank.3     : acc=0.814@7.0  (vs L2 +0.014)

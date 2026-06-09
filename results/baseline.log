@@ -1,0 +1,3 @@
+no-regularizer vs tuned-L2 baseline (3 seeds), via harness.run_condition(name="l2", l2_lambda=...)
+c=0.9: no-reg acc=0.253@13.5 | tuned-L2 acc=0.356@7.7
+c=0.6: no-reg acc=0.675@14.1 | tuned-L2 acc=0.800@6.9

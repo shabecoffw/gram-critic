@@ -1,0 +1,12 @@
+# L2 baseline vs critic, trained in lockstep under heavy noise, side by side.
+name: viz_compare
+critic: runs/critic.pt
+kind: compare
+corruption: 0.9
+reg_lambda: 1.0
+l2_lambda: 3.0e-3   # weight decay kept in BOTH the baseline and the critic panel (matches deploy c=0.9)
+hidden: 64
+train_n: 3000
+epochs: 40
+probe_k: 200
+out: runs/viz

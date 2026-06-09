@@ -1,0 +1,13 @@
+# Train the Gram Critic on the velocity field. Held out on whole configs (corruption x seed
+# combinations) so the reported cosine measures transfer to unseen training runs.
+# grad_clip is load-bearing: without it the cosine oscillates and never settles.
+name: critic_default
+zoo: runs/zoo
+out: runs/critic.pt
+
+epochs: 45
+batch: 96
+lr: 2.0e-4
+grad_clip: 1.0
+val_config_frac: 0.15
+d_model: 32

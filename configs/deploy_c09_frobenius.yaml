@@ -1,0 +1,17 @@
+# The collapse-prone CONTRAST to the headline deploy_c09.yaml: same critic, Euclidean (Frobenius)
+# matching at reg_lambda=1. Reproduces the Ablations table — amortized +0.102 but at eff-rank ~1.5
+# (the representation collapses). The point of the project is that swapping `metric` to logeuclid
+# (deploy_c09.yaml) removes the collapse; this config exists to show the before.
+name: deploy_c09_frobenius
+critic: runs/critic.pt
+reg: compare
+metric: frobenius    # Euclidean matching — rewards rank collapse
+
+corruption: 0.9
+l2_lambda: 3.0e-3
+reg_lambda: 1.0
+hidden: 64
+train_n: 3000
+epochs: 40
+seeds: 3
+probe_k: 64

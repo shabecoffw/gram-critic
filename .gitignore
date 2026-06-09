@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+
+# OS
+.DS_Store
+
+# Data + generated artifacts (regenerable via `make data` / `make zoo` / ...)
+data/
+runs/
+*.npy
+*.pt
+*.pkl
+
+# Exploratory / dead-end experiments — kept locally, not part of the published repo.
+# The curated, README-backing experiments live in experiments/main/ (committed).
+experiments/archive/
