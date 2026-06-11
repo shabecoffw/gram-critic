@@ -22,15 +22,21 @@ def _cosine(a: torch.Tensor, b: torch.Tensor) -> torch.Tensor:
     return (a * b).sum(1) / (a.norm(dim=1) * b.norm(dim=1) + 1e-8)
 
 
+def _gather(data, ids, device):
+    """One batch: the input Gram channels, the current state ``k_h2``, and the target ``delta_k``."""
+    b = torch.from_numpy(ids)
+    grams = [data[c][b].float().to(device) for c in CHANNELS]
+    return grams, data["k_h2"][b].float().to(device), data["delta_k"][b].float().to(device)
+
+
 def _cos_on(net, data, ids, device) -> float:
     net.eval()
     preds, tgts = [], []
     for i in range(0, len(ids), 512):
-        b = torch.from_numpy(ids[i : i + 512])
-        grams = [data[c][b].float().to(device) for c in CHANNELS]
+        grams, k_h2, target = _gather(data, np.sort(ids[i : i + 512]), device)
         with torch.no_grad():
-            preds.append(net(grams, data["k_h2"][b].float().to(device)).cpu())
-        tgts.append(data["delta_k"][b].float())
+            preds.append(net(grams, k_h2).cpu())
+        tgts.append(target.cpu())
     return _cosine(torch.cat(preds), torch.cat(tgts)).mean().item()
 
 
@@ -45,10 +51,8 @@ def _fit(data, tr, va, cfg: CriticConfig, device, log=False):
         net.train()
         order = tr[np.random.default_rng(100 + epoch).permutation(len(tr))]
         for i in range(0, len(order), cfg.batch):
-            b = torch.from_numpy(np.sort(order[i : i + cfg.batch]))
-            grams = [data[c][b].float().to(device) for c in CHANNELS]
-            pred = net(grams, data["k_h2"][b].float().to(device))
-            target = data["delta_k"][b].float().to(device)
+            grams, k_h2, target = _gather(data, np.sort(order[i : i + cfg.batch]), device)
+            pred = net(grams, k_h2)
             F.smooth_l1_loss(pred, target).backward()
             torch.nn.utils.clip_grad_norm_(net.parameters(), cfg.grad_clip)
             opt.step()

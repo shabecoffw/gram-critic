@@ -6,7 +6,11 @@ trajectory: take ONE validation step toward the true labels in activation space,
 local one-step ``ΔK`` (the target), move to the new state, and repeat. Inputs therefore span the
 whole push trajectory (on-policy), while every target is a single, fixed-magnitude step.
 
-Pairs are written to a float16 memmap on disk so the dataset can far exceed RAM.
+Pairs are written to a float16 memmap on disk: the generator streams each frame straight to the
+file as it is produced, so *generation* never holds the whole zoo in memory, and the file persists
+the dataset between ``make zoo`` and ``make critic``. Training is a separate matter — ``train.py``
+loads the frames it needs into RAM (the default zoo is ~3.8 GB float16 across the five channels,
+which fits); the memmap is what makes building a larger-than-RAM zoo possible, not training on one.
 """
 
 from __future__ import annotations
