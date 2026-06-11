@@ -19,7 +19,7 @@ from typing import Callable, Iterator, Sequence
 
 import numpy as np
 import torch
-import torch.nn.functional as F
+from torch import nn
 
 from .data import make_run
 from .gram import effective_rank
@@ -48,6 +48,7 @@ def train(x, y, *, make_regs: MakeRegs | None = None, y_true=None, hidden: int =
     torch.manual_seed(seed)
     model = MLP(x.shape[1], hidden).to(device)
     opt = torch.optim.Adam(model.parameters(), lr=lr)
+    criterion = nn.CrossEntropyLoss()
     n = x.shape[0]
     if y_true is None:
         y_true = y
@@ -60,13 +61,14 @@ def train(x, y, *, make_regs: MakeRegs | None = None, y_true=None, hidden: int =
             perm = torch.randperm(n, device=device)
             for step, i in enumerate(range(0, n, batch)):
                 idx = perm[i : i + batch]
+                opt.zero_grad()                          # clear last step's gradients...
                 for r in regs:
-                    r.clear()                            # zero_grad analog: drop last step's activations
-                loss = F.cross_entropy(model(x[idx]), y[idx])   # forward fills each reg's cache
+                    r.clear()                            # ...and the regularizers' captured activations
+                logits = model(x[idx])                   # forward fills each reg's cache via its hooks
+                loss = criterion(logits, y[idx])
                 for r in regs:
                     if r.active(epoch, step):
                         loss = loss + r.penalty(x[idx], y[idx], y_true[idx])
-                opt.zero_grad()
                 loss.backward()
                 opt.step()
             yield epoch, model
