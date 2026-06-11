@@ -10,6 +10,14 @@ dependencies = [
     "matplotlib>=3.7",
 ]
 
+[project.optional-dependencies]
+test = ["pytest>=7.0"]
+
+[tool.pytest.ini_options]
+# Only collect the unit suite — pytest's default ``*_test.py`` glob would otherwise try to
+# import experiment scripts under experiments/ (e.g. gram_size_test.py), which run on import.
+testpaths = ["tests"]
+
 [tool.setuptools.packages.find]
 include = ["gram_critic*"]
 

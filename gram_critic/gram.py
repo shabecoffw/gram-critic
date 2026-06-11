@@ -18,7 +18,9 @@ def gram(h: torch.Tensor, eps: float = 1e-6) -> torch.Tensor:
     Args:
         h: activations, shape ``(K, D)`` (K samples, D features).
     Returns:
-        ``(K, K)`` matrix, mean-centered across samples and scaled to unit trace-norm.
+        ``(K, K)`` matrix, mean-centered across samples and scaled by ``1/sqrt(trace)`` (so its
+        own trace is ``sqrt(trace)``, not 1) — a scale that keeps the Gram entries O(1) across
+        widths without fully discarding the magnitude.
     """
     k = h.shape[0]
     center = torch.eye(k, device=h.device, dtype=h.dtype) - 1.0 / k
