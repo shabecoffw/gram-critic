@@ -37,6 +37,27 @@ def logeuclid(k: torch.Tensor, k_target: torch.Tensor, eps: float = 1e-2) -> tor
     return ((_matlog(k, eps) - _matlog(k_target, eps).detach()) ** 2).sum()
 
 
+def affine_invariant(k: torch.Tensor, k_target: torch.Tensor, eps: float = 1e-2) -> torch.Tensor:
+    """Affine-invariant (canonical SPD) matching ``‖log(T^{-½} K T^{-½})‖²_F = Σ (log γᵢ)²``.
+
+    The *exact* geodesic distance on the SPD manifold — congruence-invariant (``K ↦ MKMᵀ``), of
+    which ``logeuclid`` is the cheaper flatten-once-with-log approximation. Both send the cone
+    boundary to infinity (so rank-preserving); they agree iff ``K`` and ``T`` commute and diverge by
+    the non-commuting part. ``γᵢ`` are the generalized eigenvalues of ``(K, T)`` = eigenvalues of the
+    congruence ``T^{-½} K T^{-½}``. Target detached, so only the inner ``K`` carries gradient."""
+    n = k.shape[0]
+    eye = torch.eye(n, device=k.device)
+    t = (k_target.detach() + eps * eye).cpu().double()
+    wt, vt = torch.linalg.eigh(t)
+    t_isqrt = (vt * wt.clamp(min=eps).rsqrt()) @ vt.t()             # detached constant (cpu, double)
+    kc = (k + eps * eye).cpu().double()                            # differentiable in k
+    m = t_isqrt @ kc @ t_isqrt
+    m = 0.5 * (m + m.t())                                          # symmetrize (kill fp drift)
+    wm, vm = torch.linalg.eigh(m)
+    logm = (vm * wm.clamp(min=eps).log()) @ vm.t()
+    return (logm ** 2).sum().float().to(k.device)
+
+
 def _matpow(k: torch.Tensor, alpha: float, eps: float = 1e-2) -> torch.Tensor:
     """Differentiable matrix power ``Kᵅ`` of a PSD Gram (spectral function → CPU eigh, like ``_matlog``)."""
     kc = (k + eps * torch.eye(k.shape[0], device=k.device)).cpu().double()
@@ -72,8 +93,8 @@ def frobenius_logdet(k: torch.Tensor, k_target: torch.Tensor, barrier: float = 1
     return frobenius(k, k_target) + barrier * logdet_barrier(k, eps)
 
 
-METRICS = {"frobenius": frobenius, "logeuclid": logeuclid, "power": power,
-           "frobenius_logdet": frobenius_logdet}
+METRICS = {"frobenius": frobenius, "logeuclid": logeuclid, "affine_invariant": affine_invariant,
+           "power": power, "frobenius_logdet": frobenius_logdet}
 
 
 def match(k: torch.Tensor, k_target: torch.Tensor, metric="frobenius") -> torch.Tensor:
